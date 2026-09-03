@@ -1,0 +1,6 @@
+models/source/
+node_modules/
+.DS_Store
+
+models/luna-rover.draft.glb
+tools/glb-pipeline/.cache/

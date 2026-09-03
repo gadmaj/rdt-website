@@ -3,134 +3,602 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NYU Robotic Design Team</title>
-    <link rel="icon" type="image/x-icon" href="resources/rdt-logo-black.png" style="height:50%;">
-    <link rel="stylesheet" href="./styles/shared.css">
-    <link rel="stylesheet" href="./styles/home.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
-    <script src="./scripts/menu_handler.js" defer></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-    </style>
+    <meta name="description" content="NASA Lunabotics + New York University = NYU-RDT. An interactive systems breakdown of Luna, the 2026 rover: locomotion, excavation, deposition, and the EE box, exploded part by part.">
+    <link rel="icon" type="image/x-icon" href="./resources/brand/favicon.ico">
+
+    <link rel="stylesheet" href="./styles/site.css">
+    <link rel="stylesheet" href="./styles/systems.css">
+
+    <script type="module" src="./scripts/site/nav.js"></script>
+    <script type="module" src="./scripts/site/sections.js"></script>
+
+    <!-- three.js is vendored (scripts/vendor/three, r180) so the page has no
+         third-party runtime dependency and loads offline/behind filters. -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "./scripts/vendor/three/three.module.js",
+        "three/addons/": "./scripts/vendor/three/addons/"
+      }
+    }
+    </script>
+    <script type="module" src="./scripts/systems/main.js"></script>
   </head>
-  <body>
-    <header>
-        <div class="container container-nav">
-            <img src="resources/rdt-logo-white.png" class="site-logo">
-            <nav>
-                <ul>
-                    <li><a href="#" class="current-page">Home</a></li>
-                    <li><a href="./team.html">Team</a></li>
-                    <li><a href="./articles.html">News</a></li>
-                    <li><a href="./projects.html">Projects</a></li>
-                    <li><a href="./sponsors.html">Sponsors</a></li>
-                </ul>
-            </nav>
-            <button class="hamburger">
-              <div class="bar"></div>
-            </button>
-        </div> <!-- close nav container -->
+
+  <body class="systems-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link skip-link--alt" href="#team">Skip to the team</a>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="site-header__brand" href="./index.html">
+          <img src="./resources/brand/rdt-logo-edit-white.png" alt="NYU Robotic Design Team">
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#top" data-nav-target="top" aria-current="true">Home</a></li>
+            <li><a href="#team" data-nav-target="team">Team</a></li>
+            <li><a href="#projects" data-nav-target="projects">Projects</a></li>
+            <li><a href="#news" data-nav-target="news">News</a></li>
+            <li><a href="#sponsors" data-nav-target="sponsors">Sponsors</a></li>
+          </ul>
+        </nav>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="nav-toggle__bar"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
     </header>
 
-    <div class="mobile-menu">
-      <a href="./index.html" class="current-page">HOME</a>
-      <a href="./team.html">TEAM</a>
-      <a href="./articles.html">NEWS</a>
-      <a href="./projects.html">PROJECTS</a>
-      <a href="./sponsors.html">SPONSORS</a>
+    <div class="mobile-nav" id="mobile-nav">
+      <nav aria-label="Mobile">
+        <a href="#top" data-nav-target="top" aria-current="true">Home</a>
+        <a href="#team" data-nav-target="team">Team</a>
+        <a href="#projects" data-nav-target="projects">Projects</a>
+        <a href="#news" data-nav-target="news">News</a>
+        <a href="#sponsors" data-nav-target="sponsors">Sponsors</a>
+      </nav>
     </div>
 
-    <div class="container-fill home-splash bg-amigo-pic-01">
-      <b><span>NYU</span> ROBOTIC DESIGN TEAM</b>
-    </div>
-    
-    <div class="container">
-      <p class="tag-line">From Campus to the Cosmos: </br> Exploring Lunar Boundaries, One Robot at a Time.</p>
-      
-      <!-- Comment the following element out when the team is NOT recruiting -->
-      <!-- <div class="application">
-        <p>We're recruiting until April 12th! Apply now!</p>
-        <p>Decisions will be returned by April 30th</p>
-        <a href="https://nyu.qualtrics.com/jfe/form/SV_aYiVtVXWzCvvGn4">APPLY</a>
-      </div> -->
-    </div>
+    <main id="main">
 
-    <div class="container container-directory" style="margin-bottom: 50px;">
-      <a class="directory-item" href="./articles.html">
-        <div class="bg-amigo-pic-01">NEWS</div>
-      </a>
-      <a class="directory-item" href="./team.html">
-        <div class="bg-team-pic-01">TEAM</div>
-      </a>
-      <a class="directory-item" href="./projects.html">
-        <div class="bg-arena-setup">PROJECTS</div>
-      </a>
-    </div>
+      <!-- Shared inline sprite. #icon-person recreates the line-art placeholder
+           avatar (circle head + shoulder arc, currentColor stroke) so no
+           headshot files are needed anywhere on the page. -->
+      <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+        <symbol id="icon-person" viewBox="0 0 32 32">
+          <circle cx="16" cy="10.5" r="5.5"
+                  fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M5 30v-1.5a11 11 0 0 1 22 0V30"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"/>
+        </symbol>
+      </svg>
 
-    <div class="container-fill" style="background-color: var(--rdt-purple); color: white;">
-      <section class="container container-section" style="margin-block: 0;">
-          <img class="section-image" src="./resources/old-team-pic.JPG">
-          <div class="section-content">
-              <div class="section-title">WHO WE ARE</div>
-              <div class="section-text">The NYU Robotic Design Team is a collegiate organization committed to designing & engineering an extraterrestrial mining robot for NASA's annual Lunabotics Competition. Each year, we integrate mechanical, electrical, and software disciplines to create a new robot.
+      <!-- ==================== SCRUBBED EXPLODED VIEW ==================== -->
+      <div class="sys-scroll" id="sys-scroll">
+
+        <div class="sys-stage" id="sys-stage">
+
+          <!-- Identity hero. The video sits BEHIND the canvas, and the canvas
+               fades up over it across the intro→explosion transition, so the
+               crossfade is a pure function of scroll like everything else.
+               No `autoplay` attribute on purpose: main.js starts playback only
+               when the hero is on screen and motion is allowed, and pauses it
+               the moment it fades out. Without JS you get the poster frame. -->
+          <div class="sys-hero" id="sys-hero" aria-hidden="true">
+            <video class="sys-hero__video" id="sys-hero-video"
+                   muted loop playsinline preload="metadata"
+                   poster="./resources/media/luna-showcase-poster.jpg">
+              <source src="./resources/media/luna-showcase-loop.mp4" type="video/mp4">
+            </video>
+            <div class="sys-hero__scrim"></div>
+          </div>
+
+          <canvas class="sys-canvas" id="sys-canvas" aria-hidden="true"></canvas>
+
+          <!-- live leader-line overlay — the signature element -->
+          <svg class="sys-callouts" id="sys-callouts" aria-hidden="true" focusable="false"></svg>
+
+          <!-- drawing-sheet furniture -->
+          <div class="sys-frame" aria-hidden="true">
+            <i class="sys-tick sys-tick--tl"></i><i class="sys-tick sys-tick--tr"></i>
+            <i class="sys-tick sys-tick--bl"></i><i class="sys-tick sys-tick--br"></i>
+          </div>
+
+          <div class="sys-titleblock" aria-hidden="true">
+            <span class="sys-titleblock__row">NYU Robotic Design Team</span>
+            <span class="sys-titleblock__row is-dim">DWG&nbsp;L&#8209;01 &nbsp;·&nbsp; Luna &nbsp;·&nbsp; Exploded assembly</span>
+          </div>
+
+          <div class="sys-readout" aria-hidden="true">
+            <span class="sys-readout__k">Sheet</span>
+            <span class="sys-readout__v" id="sys-readout-sheet">01/07</span>
+            <span class="sys-readout__k">Explode</span>
+            <span class="sys-readout__v" id="sys-readout-explode">000%</span>
+          </div>
+
+          <!-- identity hero — one mark, one line, one route in -->
+          <div class="sys-intro" id="sys-intro">
+            <h1 class="sr-only">NYU Robotic Design Team</h1>
+            <div class="sys-intro__logos">
+              <img class="sys-intro__logo-rdt" src="./resources/brand/rdt-logo-edit-white.png"
+                   alt="NYU Robotic Design Team" decoding="async">
+            </div>
+            <p class="sys-intro__cta">
+              <a href="#team">Meet the team <span aria-hidden="true">&darr;</span></a>
+            </p>
+          </div>
+
+          <!-- phase index rail — also the keyboard route into each phase -->
+          <nav class="sys-rail" id="sys-rail" aria-label="Breakdown phases">
+            <ol>
+              <li><a href="#phase-intro"      data-phase="0"><b>01</b><span>Assembly</span></a></li>
+              <li><a href="#phase-explosion"  data-phase="1"><b>02</b><span>Explosion</span></a></li>
+              <li><a href="#phase-locomotion" data-phase="2"><b>03</b><span>Locomotion</span></a></li>
+              <li><a href="#phase-excavation" data-phase="3"><b>04</b><span>Excavation</span></a></li>
+              <li><a href="#phase-deposition" data-phase="4"><b>05</b><span>Deposition</span></a></li>
+              <li><a href="#phase-ee-box"     data-phase="5"><b>06</b><span>EE Box</span></a></li>
+              <li><a href="#phase-operations" data-phase="6"><b>07</b><span>Operations</span></a></li>
+            </ol>
+          </nav>
+
+          <!-- one panel container, repopulated per phase -->
+          <aside class="sys-panel" id="sys-panel" aria-live="polite" aria-label="Active subsystem"></aside>
+
+          <div class="sys-progress" aria-hidden="true"><i id="sys-progress-fill"></i></div>
+
+          <p class="sys-nowebgl" id="sys-nowebgl" hidden>
+            This browser can’t render the 3D breakdown. Every subsystem it walks
+            through is written out in the sections below, starting with
+            <a class="link" href="#team">the team</a>.
+          </p>
+        </div><!-- /.sys-stage -->
+
+        <!-- Real headed sections spanning the scrub range: the keyboard and
+             screen-reader route through the timeline. -->
+        <div class="sys-sections" id="sys-sections">
+          <section id="phase-intro" tabindex="-1" data-phase="0">
+            <h2>Assembled view</h2>
+            <p>Luna as it rolls into the regolith bin, every subsystem seated in the frame.</p>
+          </section>
+          <section id="phase-explosion" tabindex="-1" data-phase="1">
+            <h2>Exploded view</h2>
+            <p>Every subsystem lifts clear of the rolling base at once: one exploded assembly, held for the rest of the tour.</p>
+          </section>
+          <section id="phase-locomotion" tabindex="-1" data-phase="2">
+            <h2>Locomotion</h2>
+            <p>Four chain-driven wheel modules and the frame they carry: the rolling base everything mounts to. Built by Mechanical and Electrical Engineering.</p>
+          </section>
+          <section id="phase-excavation" tabindex="-1" data-phase="3">
+            <h2>Excavation</h2>
+            <p>Bucket-ladder digging system that harvests lunar regolith. Built by Mechanical and Software Engineering.</p>
+          </section>
+          <section id="phase-deposition" tabindex="-1" data-phase="4">
+            <h2>Deposition</h2>
+            <p>Collects and dumps harvested regolith into the sieve. Built by Mechanical Engineering.</p>
+          </section>
+          <section id="phase-ee-box" tabindex="-1" data-phase="5">
+            <h2>EE Box</h2>
+            <p>Power distribution, motor controllers, and the wiring that animates every subsystem. Built by Electrical Engineering.</p>
+          </section>
+          <section id="phase-operations" tabindex="-1" data-phase="6">
+            <h2>Mission Operations</h2>
+            <p>Luna comes back together under the people who run the program: leadership, project management, marketing, and outreach.</p>
+          </section>
+        </div>
+      </div><!-- /.sys-scroll -->
+
+      <!-- ==================== 00 · MISSION ==================== -->
+      <section class="pg-section" id="mission" tabindex="-1" aria-labelledby="mission-title">
+        <div class="wrap">
+          <p class="label pg-head__label">00 &nbsp;&mdash;&nbsp; Mission</p>
+          <h2 class="sr-only" id="mission-title">Mission</h2>
+          <p class="pg-mission">
+            We are a team of undergraduate students who design, build, test, and
+            compete a lunar mining robot at NASA&rsquo;s annual Lunabotics
+            competition, all while advancing autonomous excavation research and
+            bringing robotics outreach across New York City.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== 01 · TEAM ==================== -->
+      <section class="pg-section" id="team" tabindex="-1" aria-labelledby="team-title">
+        <div class="wrap">
+          <div class="pg-head">
+            <p class="label pg-head__label">01 &nbsp;—&nbsp; Roster</p>
+            <h2 class="pg-head__title" id="team-title">Team</h2>
+            <p class="lede pg-head__lede">
+              A vertically integrated project: mechanical, electrical, and software
+              disciplines assembled around one robot, one competition season at a
+              time. Members are listed by role, not by name.
+            </p>
+          </div>
+
+          <div id="roster">
+            <p class="label roster__loading">Loading roster&hellip;</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 02 · PROJECTS ==================== -->
+      <section class="pg-section pg-section--tint" id="projects" tabindex="-1"
+               aria-labelledby="projects-title">
+        <div class="wrap">
+          <div class="pg-head">
+            <p class="label pg-head__label">02 &nbsp;—&nbsp; Build Record</p>
+            <h2 class="pg-head__title" id="projects-title">Projects</h2>
+            <p class="lede pg-head__lede">
+              For NASA's annual Lunabotics competition, the team designs and builds
+              a robot that digs, hauls, and dumps simulated lunar regolith. One
+              robot per season. This is the build record.
+            </p>
+          </div>
+
+          <div class="pg-projects">
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 01 &nbsp;&middot;&nbsp; Current</p>
+              <h3 class="pg-project__name">LUNA</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2025 &mdash; 2026</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2026</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd>
+                <dt>Record</dt><dd><a class="link" href="https://www.youtube.com/watch?v=-IY9C2s6tIc" target="_blank" rel="noopener">Proof of life (video)</a></dd>
+              </dl>
+
+              <figure class="pg-project__photo">
+                <img src="./resources/media/team/team-2025-26-luna.jpg" alt="The 2025–26 team on the Wunsch Hall steps"
+                     width="1340" height="740" loading="lazy" decoding="async">
+                <figcaption class="label">The LUNA season team &nbsp;&middot;&nbsp; Fall 2025</figcaption>
+              </figure>
+
+            </article>
+
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 02</p>
+              <h3 class="pg-project__name">TALOS</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2024 &mdash; 2025</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2025</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd>
+                <dt>Record</dt><dd><a class="link" href="https://www.youtube.com/watch?v=dLKOKua0ePg" target="_blank" rel="noopener">Proof of life (video)</a></dd>
+              </dl>
+              <figure class="pg-project__photo">
+                <img src="./resources/media/team/team-2024-25-talos.jpg" alt="The 2024–25 team on the Wunsch Hall steps"
+                     width="1600" height="1067" loading="lazy" decoding="async">
+                <figcaption class="label">The TALOS season team &nbsp;&middot;&nbsp; Fall 2024</figcaption>
+              </figure>
+            </article>
+
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 03</p>
+              <h3 class="pg-project__name">TITAN</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2023 &mdash; 2024</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2024</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd>
+                <dt>Record</dt><dd><a class="link" href="https://www.youtube.com/watch?v=20tFcUkBZsE" target="_blank" rel="noopener">Proof of life (video)</a></dd>
+              </dl>
+              <figure class="pg-project__photo">
+                <img src="./resources/media/team/team-2023-24-titan.jpg" alt="The 2023–24 team"
+                     width="1600" height="1109" loading="lazy" decoding="async">
+                <figcaption class="label">The TITAN season team</figcaption>
+              </figure>
+            </article>
+
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 04</p>
+              <h3 class="pg-project__name">A.M.I.G.O.</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2022 &mdash; 2023</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2023</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd>
+                <dt>Record</dt><dd><a class="link" href="https://www.youtube.com/watch?v=NHGFNLLDJk4" target="_blank" rel="noopener">Proof of life (video)</a></dd><dt>Acronym</dt><dd>Autonomous Machine In Galactic Operations</dd>
+              </dl>
+            </article>
+
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 05</p>
+              <h3 class="pg-project__name">A.S.T.R.O.</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2021 &mdash; 2022</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2022</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd>
+                <dt>Record</dt><dd><a class="link" href="https://www.youtube.com/watch?v=6MSYlTj9N_c" target="_blank" rel="noopener">Proof of life (video)</a></dd><dt>Acronym</dt><dd>&mdash;</dd>
+              </dl>
+              <figure class="pg-project__photo">
+                <img src="./resources/media/team/team-2021-22-astro.jpg" alt="The 2021–22 team on the Wunsch Hall steps"
+                     width="1600" height="1067" loading="lazy" decoding="async">
+                <figcaption class="label">The ASTRO season team &nbsp;&middot;&nbsp; Spring 2022</figcaption>
+              </figure>
+            </article>
+
+            <article class="pg-project">
+              <p class="label pg-project__no">Designation 06</p>
+              <h3 class="pg-project__name">P.I.P.E.R.</h3>
+              <dl class="spec">
+                <dt>Season</dt><dd>2020 &mdash; 2021</dd>
+                <dt>Competition</dt><dd>NASA Lunabotics 2021</dd>
+                <dt>Disciplines</dt><dd>Mechanical &middot; Electrical &middot; Software</dd><dt>Acronym</dt><dd>Project: Inter Planetary Excavating Rover</dd>
+              </dl>
+            </article>
+          </div>
+
+          <div class="pg-prevyears">
+            <div class="doc-head">
+              <span class="doc-head__index">02.2</span>
+              <h3 class="doc-head__title" id="prevyears-title">Earlier seasons</h3>
+              <span class="doc-head__meta">Team record</span>
+            </div>
+            <ul class="pg-prevyears__grid" aria-labelledby="prevyears-title">
+              <li>
+                <img src="./resources/media/team/team-2017-18.jpg" alt="The 2017–18 team"
+                     width="1600" height="1067" loading="lazy" decoding="async">
+                <p class="label">2017 &mdash; 2018</p>
+              </li>
+              <li>
+                <img src="./resources/media/team/team-2019.jpg" alt="The 2019 team"
+                     width="962" height="574" loading="lazy" decoding="async">
+                <p class="label">2019</p>
+              </li>
+              <li>
+                <img src="./resources/media/team/team-2020-21-piper.jpg" alt="The team outside 5 MetroTech Center in winter"
+                     width="1600" height="900" loading="lazy" decoding="async">
+                <p class="label">MetroTech &middot; winter</p>
+              </li>
+            </ul>
+          </div>
+
+          <p class="label pg-projects__more">
+            Earlier machines (ORBIT, ATLAS) live on the
+            <a class="link" href="https://www.youtube.com/@roboticdesignteamnyurdt4891/videos" target="_blank" rel="noopener">team's channel</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== 03 · NEWS ==================== -->
+      <section class="pg-section" id="news" tabindex="-1" aria-labelledby="news-title">
+        <div class="wrap">
+          <div class="pg-head">
+            <p class="label pg-head__label">03 &nbsp;—&nbsp; Press &amp; Publications</p>
+            <h2 class="pg-head__title" id="news-title">News</h2>
+            <p class="lede pg-head__lede">
+              Where the team has turned up in print, from competition coverage to
+              the university record.
+            </p>
+          </div>
+
+          <div class="pg-subsection">
+            <ol class="pg-archive" aria-labelledby="news-title">
+              <li class="pg-archive__item">
+                <a href="https://brooklyneagle.com/articles/2023/05/02/robots-ar-and-cyber-everything-at-nyu-tandons-downtown-brooklyn-showcase/"
+                   target="_blank" rel="noopener">
+                  <span class="pg-archive__index">001</span>
+                  <span class="pg-archive__body">
+                    <span class="pg-archive__title">Robots, AR, and cyber-everything at NYU Tandon's Downtown Brooklyn showcase</span>
+                    <span class="pg-archive__source">brooklyneagle.com</span>
+                  </span>
+                  <span class="pg-archive__date">2023.05.02</span>
+                  <svg class="arrow pg-archive__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                    <path fill="none" stroke="currentColor" stroke-width="1.25"
+                          d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+                  </svg>
+                </a>
+              </li>
+
+              <li class="pg-archive__item">
+                <a href="https://engineering.nyu.edu/news/robots-ar-and-cyber-everything-nyu-tandons-research-excellence-exhibit"
+                   target="_blank" rel="noopener">
+                  <span class="pg-archive__index">002</span>
+                  <span class="pg-archive__body">
+                    <span class="pg-archive__title">Robots, AR, and cyber-everything at NYU Tandon's Research Excellence Exhibit</span>
+                    <span class="pg-archive__source">engineering.nyu.edu</span>
+                  </span>
+                  <span class="pg-archive__date">2023.05.02</span>
+                  <svg class="arrow pg-archive__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                    <path fill="none" stroke="currentColor" stroke-width="1.25"
+                          d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+                  </svg>
+                </a>
+              </li>
+
+              <li class="pg-archive__item">
+                <a href="https://engineering.nyu.edu/news/what-do-coney-island-and-mars-have-common-ask-nyu-robotics-design-team"
+                   target="_blank" rel="noopener">
+                  <span class="pg-archive__index">003</span>
+                  <span class="pg-archive__body">
+                    <span class="pg-archive__title">What do Coney Island and Mars have in common? Ask the NYU Robotic Design Team</span>
+                    <span class="pg-archive__source">engineering.nyu.edu</span>
+                  </span>
+                  <span class="pg-archive__date">2021.07.20</span>
+                  <svg class="arrow pg-archive__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                    <path fill="none" stroke="currentColor" stroke-width="1.25"
+                          d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+                  </svg>
+                </a>
+              </li>
+
+              <li class="pg-archive__item">
+                <a href="https://engineering.nyu.edu/research-innovation/student-research/vertically-integrated-projects/vip-teams/nyu-robotic-design-team"
+                   target="_blank" rel="noopener">
+                  <span class="pg-archive__index">004</span>
+                  <span class="pg-archive__body">
+                    <span class="pg-archive__title">NYU Robotic Design Team &mdash; Vertically Integrated Projects</span>
+                    <span class="pg-archive__source">engineering.nyu.edu</span>
+                  </span>
+                  <span class="pg-archive__date">&mdash;</span>
+                  <svg class="arrow pg-archive__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                    <path fill="none" stroke="currentColor" stroke-width="1.25"
+                          d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+                  </svg>
+                </a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 04 · SPONSORS ==================== -->
+      <section class="pg-section pg-section--tint" id="sponsors" tabindex="-1"
+               aria-labelledby="sponsors-title">
+        <div class="wrap">
+          <div class="pg-head">
+            <p class="label pg-head__label">04 &nbsp;—&nbsp; Support</p>
+            <h2 class="pg-head__title" id="sponsors-title">Sponsors</h2>
+            <p class="lede pg-head__lede">
+              Every season's robot is paid for by people who chose to put money
+              behind a student team. These are they.
+            </p>
+          </div>
+
+          <!-- Scrolling ticker. Six identical runs; the loop shifts by exactly
+               one run so the wrap is seamless. Runs 2-6 are aria-hidden, so
+               assistive tech reads the four names once. Pauses on hover and on
+               keyboard focus; prefers-reduced-motion renders a static wrap. -->
+          <div class="ticker" tabindex="0" role="group"
+               aria-label="Sponsor register — scrolling; hover or focus to pause">
+            <div class="ticker__viewport">
+              <div class="ticker__track">
+                <ul class="ticker__run">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
+                <ul class="ticker__run" aria-hidden="true">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
+                <ul class="ticker__run" aria-hidden="true">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
+                <ul class="ticker__run" aria-hidden="true">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
+                <ul class="ticker__run" aria-hidden="true">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
+                <ul class="ticker__run" aria-hidden="true">
+                  <li>CMT Hogan</li>
+                  <li>NYU VIP Department</li>
+                  <li>NYU MAE Department</li>
+                  <li>NYU ECE Department</li>
+                </ul>
               </div>
+            </div>
           </div>
-      </section>
-    </div>
 
-      <section class="container container-section"  style="margin-block: 0;">
-          <div class="section-content">
-              <div class="section-title">OUR MISSION</div>
-              <div class="section-text">Our mission is to create innovative robots for the advancement of the field, while having a positive impact on our school and community.</div>
+          <p class="label ticker__note">
+            Thank you to each of them for backing the build.
+          </p>
+
+          <div class="pg-subsection">
+            <div class="doc-head">
+              <span class="doc-head__index">04.1</span>
+              <h3 class="doc-head__title" id="contact-title">Contact</h3>
+              <span class="doc-head__meta"><a class="link" href="mailto:eng-rdt@nyu.edu">eng-rdt@nyu.edu</a></span>
+            </div>
+
+            <form class="contact__form" action="https://formsubmit.co/eng-rdt@nyu.edu"
+                  method="POST" target="_blank" aria-labelledby="contact-title">
+              <div class="contact__row">
+                <div class="field">
+                  <label for="firstname">First name</label>
+                  <input type="text" id="firstname" name="firstname" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                  <label for="lastname">Last name</label>
+                  <input type="text" id="lastname" name="lastname" autocomplete="family-name" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about you" required></textarea>
+              </div>
+
+              <button class="btn" type="submit">
+                Send
+                <svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                  <path fill="none" stroke="currentColor" stroke-width="1.25" d="M2 8h11M9 4l4 4-4 4"/>
+                </svg>
+              </button>
+            </form>
           </div>
-          <img class="section-image" src="./resources/rdt-logo-black.png" style="object-fit: contain;">
-      </section>
-    
-    <div class="container-fill" style="background-color: var(--rdt-purple); color: white;">
-      <section class="container container-section"  style="margin-block: 0;">
-          <img class="section-image" src="./resources/amigo-pic-01.jpg" style="object-fit: cover; object-position: right;">
-          <div class="section-content">
-              <div class="section-title">The Competition</div>
-              <div class="section-text">NASA's Lunabotics Competition is an annual showcase of problem solving and engineering to promote the research of lunar excavation and construction. We enthusiastically participate each year, engaging in direct competition with other collegiate teams from across the nation.</div>
-          </div>
-      </section>
-    </div>
-
-
-
-    <footer>
-      <div class="container container-nav">
-        <img src="resources/tandon_long_white.png" class="tandon-logo">
-      </div>
-
-      <div class="container container-footer">
-        <!-- social media -->
-        <div>
-          <!-- linkedin -->
-          <a  href="https://www.linkedin.com/company/nyu-robotic-design-team" >
-            <img src="resources/icons/linkedin-icon.png" class="footer-icon">
-          </a>
-          
-          <!-- insta -->
-          <a  href="https://www.instagram.com/nyurdt/">
-            <img src="resources/icons/insta-icon.png" class="footer-icon">
-          </a>
-
-          <!-- email -->
-          <a  href="mailto:nyu-rdt@nyu.edu">
-            <img src="resources/icons/email-icon.png" class="footer-icon">
-          </a>
-
         </div>
-        
-        <!-- lines -->
-        <div style="font-size: 15px;">
-          
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <div class="site-footer__logos">
+          <img class="is-tandon-long" src="./resources/brand/tandon_long_white.png" alt="NYU Tandon School of Engineering">
+          <img class="is-vip" src="./resources/brand/VIP.png" alt="Vertically Integrated Projects">
+        </div>
+
+        <p class="site-footer__address label">
+          325 Gold St, Brooklyn, NY 11201
+        </p>
+
+        <ul class="social">
+          <li>
+            <a href="https://www.linkedin.com/company/nyu-robotic-design-team"
+               target="_blank" rel="noopener" aria-label="RDT on LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/nyurdt/"
+               target="_blank" rel="noopener" aria-label="RDT on Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" fill-rule="evenodd" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm4.5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@roboticdesignteamnyurdt4891"
+               target="_blank" rel="noopener" aria-label="RDT on YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26.2 26.2 0 0 0 2 12c0 1.62.13 3.23.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77c.27-1.57.4-3.18.4-4.8s-.13-3.23-.4-4.8ZM10 15.2V8.8l5.5 3.2L10 15.2Z"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:eng-rdt@nyu.edu" aria-label="Email the team">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v.4l-10 5.85L2 6.9v-.4Zm0 2.72V17.5A2.5 2.5 0 0 0 4.5 20h15a2.5 2.5 0 0 0 2.5-2.5V9.22l-9.49 5.55a1 1 0 0 1-1.02 0L2 9.22Z"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+
+        <p class="site-footer__legal">
           Unless otherwise noted, all content copyright NYU Robotic Design Team. All rights reserved.
-        </div>
+        </p>
       </div>
     </footer>
-
   </body>
 </html>
