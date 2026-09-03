@@ -975,6 +975,8 @@ main { display: block; flex: 1 0 auto; }
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 3 / 2;    /* one ratio across every season photo */
+  object-fit: cover;
   border: 1px solid var(--hairline);
 }
 

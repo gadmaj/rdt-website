@@ -95,6 +95,20 @@ export function createPanel(el, { leads, timeline }) {
 
     const teams = (phase.sub && phase.sub.teams) || [];
     const people = peopleFor(leads, teams);
+
+    // Lead with the people whose role names this subsystem (the Locomotion
+    // stop opens on the Locomotion Lead), then systems engineers, then the
+    // rest in team order. Stable sort keeps ties in roster order.
+    if (!isClosing && phase.title) {
+      const kw = phase.title.toLowerCase().split(/[^a-z]+/).filter((w) => w.length > 3);
+      const score = (p) => {
+        const pos = String(p.position || '').toLowerCase();
+        if (kw.some((w) => pos.includes(w))) return 0;
+        if (pos.includes('systems engineer')) return 1;
+        return 2;
+      };
+      people.sort((a, b) => score(a) - score(b));
+    }
     const total = timeline.subsystemCount;
     const no = isClosing
       ? 'Closing'

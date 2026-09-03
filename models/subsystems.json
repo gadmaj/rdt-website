@@ -31,7 +31,7 @@
     },
     {
       "group": "sys_ee_box",
-      "title": "EE Box",
+      "title": "Electrical Box",
       "role": "Power distribution, motor controllers, and the wiring that animates every subsystem.",
       "matchPatterns": [],
       "matchPatternsL2": ["^EE Box"],
@@ -41,8 +41,8 @@
   ],
   "closing": {
     "title": "Mission Operations",
-    "role": "The systems behind the systems — the rover reassembles under the people who run the program.",
-    "teams": ["Team Leadership", "Project Management", "Marketing and Public Relations", "Outreach", "Advisory", "Faculty"]
+    "role": "Luna comes back together under the people who run the program.",
+    "teams": ["Faculty", "Team Leadership", "Project Management"]
   },
   "pipeline": {
     "targets": { "finalMaxBytes": 12582912, "maxDrawCalls": 60, "maxTriangles": 900000 },

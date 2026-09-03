@@ -118,7 +118,7 @@ async function renderRoster() {
   } catch (error) {
     mount.innerHTML =
       '<p class="roster__error">The roster could not be loaded. Please refresh, ' +
-      'or email <a class="link" href="mailto:nyu-rdt@nyu.edu">nyu-rdt@nyu.edu</a>.';
+      'or email <a class="link" href="mailto:eng-rdt@nyu.edu">eng-rdt@nyu.edu</a>.';
     console.error('sections.js — roster fetch failed:', error);
     return;
   }
