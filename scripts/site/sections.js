@@ -91,11 +91,8 @@ function buildGroup(title, people, index) {
   const head = document.createElement('div');
   head.className = 'doc-head';
   head.innerHTML =
-    `<h3 class="doc-head__title" id="${headingId}"></h3>` +
-    '<span class="doc-head__meta"></span>';
+    `<h3 class="doc-head__title" id="${headingId}"></h3>`;
   head.querySelector('.doc-head__title').textContent = title;
-  head.querySelector('.doc-head__meta').textContent =
-    `${people.length} ${people.length === 1 ? 'member' : 'members'}`;
 
   const list = document.createElement('ul');
   list.className = 'roster';
