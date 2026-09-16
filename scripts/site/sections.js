@@ -91,7 +91,6 @@ function buildGroup(title, people, index) {
   const head = document.createElement('div');
   head.className = 'doc-head';
   head.innerHTML =
-    `<span class="doc-head__index">01.${index}</span>` +
     `<h3 class="doc-head__title" id="${headingId}"></h3>` +
     '<span class="doc-head__meta"></span>';
   head.querySelector('.doc-head__title').textContent = title;
@@ -100,7 +99,14 @@ function buildGroup(title, people, index) {
 
   const list = document.createElement('ul');
   list.className = 'roster';
-  people.forEach((person) => list.append(buildMember(person)));
+  // Stable partition: systems engineers first, preserving roster order within
+  // both groups. A discipline can have systems engineers without lead titles.
+  const isSystemsEngineer = (person) => /\bsystems engineer\b/i.test(person.position || '');
+  const orderedPeople = [
+    ...people.filter(isSystemsEngineer),
+    ...people.filter((person) => !isSystemsEngineer(person))
+  ];
+  orderedPeople.forEach((person) => list.append(buildMember(person)));
 
   section.append(head, list);
   return section;

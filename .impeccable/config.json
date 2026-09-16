@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-16T05:17:07.812Z",
+        "reason": "Agent: intentional solid NYU-purple identity (#57068c); user explicitly permitted purple as main/accent color. No purple gradient or cyan-on-dark treatment."
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "news.html"
+        ],
+        "createdAt": "2026-09-16T05:17:07.860Z",
+        "reason": "Agent: News shares the intentional NYU-purple identity (#57068c); user explicitly permitted purple as main/accent color. No purple gradient or cyan-on-dark treatment."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-16T05:17:07.919Z",
+        "reason": "Agent: verified Chromium at 1440px and 390px. Robot/history sections have 100.8px/64px block padding and inner wrap has 72px/22px side padding; all spec dd rows have 10px top/bottom padding. Detector misses logical padding and nested wrap insets; all three reported shapes are false positives."
+      }
+    ]
+  }
+}
